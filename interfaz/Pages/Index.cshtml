@@ -1,0 +1,98 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Api Tenor - Interface";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Consulta de API Tenor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            padding: 20px;
+            background-color: #333;
+            color: white;
+        }
+
+        form {
+            text-align: center;
+            margin: 20px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input[type="text"] {
+            width: 300px;
+            padding: 5px;
+            margin: 5px;
+        }
+
+        button {
+            background-color: #333;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #555;
+        }
+
+        .text-danger {
+            color: red;
+            text-align: center;
+            margin: 20px;
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        img {
+            display: block;
+            margin: 20px auto;
+            max-width: 100%;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>Consulta de API</h1>
+
+    <form method="post">
+        <label for="query">Consulta API:</label>
+        <input type="text" asp-for="Query" required>
+        <button type="submit">Enviar</button>
+    </form>
+
+    @if (!string.IsNullOrEmpty(ViewData["Error"] as string))
+    {
+        <div class="text-danger">@ViewData["Error"]</div>
+    }
+
+    @if (!string.IsNullOrEmpty(ViewData["GifUrl"] as string))
+    {
+        <div>
+            <h2>Resultado:</h2>
+            <img src="@ViewData["GifUrl"]" alt="GIF">
+            @if (!string.IsNullOrEmpty(ViewData["Description"] as string))
+            {
+                <h2>@ViewData["Description"]</h2>
+            }
+        </div>
+    }
+</body>
+</html>
